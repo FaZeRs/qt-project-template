@@ -1,0 +1,12 @@
+#ifndef ROOM_SKETCHER_CONFIG_H
+#define ROOM_SKETCHER_CONFIG_H
+
+namespace room_sketcher::config {
+inline constexpr char const* project_name = "@PROJECT_NAME@";
+inline constexpr char const* project_version = "@PROJECT_VERSION@";
+inline constexpr char const* project_description = "@PROJECT_DESCRIPTION@";
+inline constexpr char const* project_url = "@PROJECT_HOMEPAGE_URL@";
+inline constexpr char const* organization_name = "Giraffe360";
+}  // namespace room_sketcher::config
+
+#endif  // ROOM_SKETCHER_CONFIG_H
