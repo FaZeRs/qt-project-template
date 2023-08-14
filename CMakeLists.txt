@@ -29,7 +29,7 @@ enable_sanitizers(project_options
         ${ENABLE_SANITIZER_THREAD}
         ${ENABLE_SANITIZER_MEMORY})
 
-if(ENABLE_PCH)
+if(ENABLE_PCH AND NOT ENABLE_CLANG_TIDY)
   target_precompile_headers(
     project_options
     INTERFACE

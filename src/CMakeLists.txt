@@ -51,6 +51,10 @@ if (ENABLE_INCLUDE_WHAT_YOU_USE)
   enable_include_what_you_use(${CMAKE_PROJECT_NAME})
 endif()
 
+if(ENABLE_PCH AND NOT ENABLE_CLANG_TIDY)
+  target_precompile_headers(${CMAKE_PROJECT_NAME} PUBLIC pch.h)
+endif()
+
 # Install the executable into "${CMAKE_INSTALL_PREFIX}/bin".
 install(TARGETS ${CMAKE_PROJECT_NAME}
     BUNDLE DESTINATION .
