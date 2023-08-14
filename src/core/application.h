@@ -1,6 +1,6 @@
 #pragma once
 
-#include <QCoreApplication>
+#include <qcoreapplication.h>
 
 #include "base.h"
 #include "settings.h"

@@ -1,23 +1,28 @@
 #include "mainwindow.h"
 
+#include <QtCore/qobjectdefs.h>
 #include <config.h>
+#include <qaction.h>
+#include <qapplication.h>
+#include <qcoreapplication.h>
+#include <qdatetime.h>
+#include <qkeysequence.h>
+#include <qmenu.h>
+#include <qmenubar.h>
+#include <qmessagebox.h>
+#include <qstatusbar.h>
+#include <qstring.h>
 
-#include <QApplication>
-#include <QDate>
-#include <QMenu>
-#include <QMenuBar>
-#include <QMessageBox>
-#include <QStatusBar>
-#include <QStyle>
+#include "../core/parameters.h"
 
-#include "../core/settings.h"
+class QWidget;
 
 namespace room_sketcher {
 
 MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
     : QMainWindow(parent, flags) {
   setObjectName("MainWindow");
-  setWindowTitle(config::project_name);
+  setWindowTitle(parameters::window_title);
 
   setupMenuBar();
 

@@ -1,12 +1,16 @@
-
-
 #include "application.h"
 
 #include <config.h>
+#include <qapplication.h>
+#include <qbytearray.h>
+#include <qlogging.h>
+#include <qscopeguard.h>
+#include <qstring.h>
 #include <sentry.h>
+#include <spdlog/common.h>
 #include <spdlog/spdlog.h>
 
-#include <QApplication>
+#include <cstring>
 
 #include "logger.h"
 #include "parameters.h"

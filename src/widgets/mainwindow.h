@@ -1,6 +1,9 @@
 #pragma once
 
-#include <QMainWindow>
+#include <qmainwindow.h>
+#include <qnamespace.h>
+
+class QWidget;
 
 namespace room_sketcher {
 

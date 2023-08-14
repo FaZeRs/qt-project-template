@@ -1,6 +1,11 @@
 #include "settings.h"
 
-#include <QKeySequence>
+#include <qcontainerfwd.h>
+#include <qforeach.h>
+#include <qkeysequence.h>
+#include <qvariant.h>
+
+class QObject;
 
 namespace room_sketcher {
 

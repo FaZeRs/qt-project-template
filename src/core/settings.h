@@ -1,10 +1,11 @@
 #pragma once
 
+#include <qsettings.h>
+#include <qstring.h>
 #include <qtmetamacros.h>
+#include <qtypes.h>
 
-#include <QObject>
-#include <QSettings>
-
+class QObject;
 
 namespace room_sketcher {
 

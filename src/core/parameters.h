@@ -8,4 +8,9 @@ inline static constexpr auto sentry_dsn{
 // File paths
 inline static constexpr auto log_path{"logs/main.log"};
 
+// Window parameters
+inline static constexpr auto window_title{"Room Sketcher"};
+inline static constexpr auto window_width{800};
+inline static constexpr auto window_height{600};
+
 }  // namespace room_sketcher::parameters

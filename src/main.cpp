@@ -1,9 +1,7 @@
-#include <QDebug>
-#include <QMap>
-#include <QPainter>
-#include <QPainterPath>
 
 #include "core/application.h"
+#include "core/base.h"
+#include "core/parameters.h"
 #include "widgets/mainwindow.h"
 
 int main(int argc, char *argv[]) {
@@ -11,7 +9,7 @@ int main(int argc, char *argv[]) {
   Application app(argc, argv);
 
   MainWindow window;
-  window.resize(800, 600);
+  window.resize(parameters::window_width, parameters::window_height);
   window.show();
 
   return app.run();
