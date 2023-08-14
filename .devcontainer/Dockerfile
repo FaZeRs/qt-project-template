@@ -33,10 +33,10 @@ RUN apt-get update -qq && export DEBIAN_FRONTEND=noninteractive && \
     locales \
     curl libcurl4-openssl-dev \
     libgl1-mesa-dev \
-    libdbus-1-dev libfontconfig1-dev libxkbcommon-dev libxkbcommon-x11-dev libxcb-xinerama0-dev libxcb-xkb-dev \
+    libxkbcommon-x11-0 libdbus-1-dev libfontconfig1-dev libxkbcommon-dev libxkbcommon-x11-dev libxcb-xinerama0-dev libxcb-xkb-dev \
     libfreetype6-dev libx11-dev libx11-xcb-dev libxext-dev libxfixes-dev libxi-dev libxrender-dev libxcb1-dev \
     libxcb-glx0-dev libxcb-keysyms1-dev libxcb-image0-dev libxcb-shm0-dev libxcb-icccm4-dev libxcb-sync-dev \
-    libxcb-xfixes0-dev libxcb-shape0-dev libxcb-randr0-dev libxcb-render-util0-dev libxcb-util-dev
+    libxcb-xfixes0-dev libxcb-shape0-dev libxcb-randr0-dev libxcb-render-util0-dev libxcb-util-dev libxcb-cursor0
 
 # User-settable versions:
 # This Dockerfile should support gcc-[7, 8, 9, 10, 11, 12, 13] and clang-[10, 11, 12, 13, 14, 15, 16]
@@ -124,7 +124,7 @@ ENV LC_ALL en_US.UTF-8
 # Install QT
 RUN pip3 install aqtinstall
 
-ARG QT_VERSION=6.5.1
+ARG QT_VERSION=6.5.2
 ARG QT_PATH=/opt/qt
 ARG QT_MODULES
 ARG QT_HOST=linux
