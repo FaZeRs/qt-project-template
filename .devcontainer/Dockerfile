@@ -30,7 +30,7 @@ RUN apt-get update -qq && export DEBIAN_FRONTEND=noninteractive && \
     openssh-client gpg-agent socat rsync \
     make ninja-build git \
     python3 python3-pip \
-    locales \
+    locales zsh fonts-firacode \
     curl libcurl4-openssl-dev \
     libgl1-mesa-dev \
     libxkbcommon-x11-0 libdbus-1-dev libfontconfig1-dev libxkbcommon-dev libxkbcommon-x11-dev libxcb-xinerama0-dev libxcb-xkb-dev \
@@ -151,9 +151,23 @@ ENV CXX=${CXX:-"g++"}
 
 USER $USERNAME
 
+# Install Oh My ZSH!
+ENV TERM xterm
+ENV SHELL /bin/zsh
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+RUN curl -fsSL https://starship.rs/install.sh | sh -s -- -y
+RUN echo 'eval "$(starship init zsh)"' >> ~/.zshrc
+
+RUN git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+RUN git clone https://github.com/zsh-users/zsh-completions.git ~/.oh-my-zsh/custom/plugins/zsh-completions
+RUN sed -i '/^plugins/c\plugins=(git zsh-autosuggestions sudo web-search copypath copyfile history zsh-syntax-highlighting zsh-completions)' ~/.zshrc
+RUN sed -i '/^ZSH_THEME/c\ZSH_THEME=""' ~/.zshrc
+
 ENV CPM_SOURCE_CACHE=/home/$USERNAME/.cache/CPM
 # Include project
 #ADD . /workspaces/cpp_starter_project
 #WORKDIR /workspaces/cpp_starter_project
 
-CMD ["/bin/bash"]
+# CMD ["/bin/bash"]

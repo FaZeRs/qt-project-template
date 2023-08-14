@@ -20,7 +20,9 @@
         "vscode": {
             "settings": {
                 "cmake.configureOnOpen": true,
-                "editor.formatOnSave": true
+                "editor.formatOnSave": true,
+                "terminal.integrated.shell.linux": "/bin/zsh",
+                "terminal.integrated.fontFamily": "'Fira Code', monospace"
             },
             "extensions": [
                 "ms-vscode.cpptools",
