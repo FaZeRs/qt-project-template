@@ -40,17 +40,6 @@ target_link_system_libraries(${CMAKE_PROJECT_NAME} PRIVATE
 
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE "${CMAKE_BINARY_DIR}/configured_files/include")
 
-include(${CMAKE_SOURCE_DIR}/cmake/StaticAnalyzers.cmake)
-if (ENABLE_CPPCHECK)
-  enable_cppcheck(${CMAKE_PROJECT_NAME} ${WARNINGS_AS_ERRORS} "")
-endif()
-if (ENABLE_CLANG_TIDY)
-  enable_clang_tidy(${CMAKE_PROJECT_NAME} ${WARNINGS_AS_ERRORS} "")
-endif()
-if (ENABLE_INCLUDE_WHAT_YOU_USE)
-  enable_include_what_you_use(${CMAKE_PROJECT_NAME})
-endif()
-
 if(ENABLE_PCH AND NOT ENABLE_CLANG_TIDY)
   target_precompile_headers(${CMAKE_PROJECT_NAME} PUBLIC pch.h)
 endif()

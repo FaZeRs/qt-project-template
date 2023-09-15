@@ -21,6 +21,17 @@ add_library(project_options INTERFACE)
 include(cmake/CompilerWarnings.cmake)
 set_project_warnings(project_warnings ${WARNINGS_AS_ERRORS} "" "" "")
 
+include(cmake/StaticAnalyzers.cmake)
+if (ENABLE_CPPCHECK)
+  enable_cppcheck(project_warnings ${WARNINGS_AS_ERRORS} "")
+endif()
+if (ENABLE_CLANG_TIDY)
+  enable_clang_tidy(project_warnings ${WARNINGS_AS_ERRORS} "")
+endif()
+if (ENABLE_INCLUDE_WHAT_YOU_USE)
+  enable_include_what_you_use(project_warnings)
+endif()
+
 include(cmake/Sanitizers.cmake)
 enable_sanitizers(project_options
         ${ENABLE_SANITIZER_ADDRESS}
