@@ -77,10 +77,12 @@ void Settings::resetShortcutsToDefaults() {
   }
 }
 
+// NOLINTNEXTLINE
 #define GET_SHORTCUT(shortcutName, defaultValueFunction)         \
   return contains(shortcutName) ? value(shortcutName).toString() \
                                 : defaultValueFunction();
 
+// NOLINTNEXTLINE
 #define SET_SHORTCUT(shortcutName, defaultValueFunction, notifySignal) \
   QVariant existingValue = value(shortcutName);                        \
   QString existingStringValue = defaultValueFunction();                \

@@ -62,6 +62,7 @@ static Scope<QCoreApplication> createApplication(int& argc, char** argv) {
   QCoreApplication::setApplicationVersion(config::project_version);
 
   for (int i = 1; i < argc; ++i) {
+    // NOLINTNEXTLINE
     if (strcmp(argv[i], "-no-gui") == 0)
       return CreateScope<QCoreApplication>(argc, argv);
   }
