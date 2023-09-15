@@ -8,7 +8,8 @@ set(SOURCE_FILES
     main.cpp
     core/application.cpp
     core/settings.cpp
-    widgets/mainwindow.cpp)
+    widgets/main_window.cpp
+    widgets/settings_dialog.cpp)
 
 qt_add_executable(${CMAKE_PROJECT_NAME}
         ${SOURCE_FILES})
@@ -24,11 +25,11 @@ target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
 
 if (USE_OPENMP)
 	find_package(OpenMP)
-    if(OpenMP_CXX_FOUND)
+  if(OpenMP_CXX_FOUND)
     target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC OpenMP::OpenMP_CXX)
 	else()
-        message(${WARNING_MESSAGE} "OpenMP requested but library not found")
-    endif()
+    message(${WARNING_MESSAGE} "OpenMP requested but library not found")
+  endif()
 endif()
 
 target_link_system_libraries(${CMAKE_PROJECT_NAME} PRIVATE

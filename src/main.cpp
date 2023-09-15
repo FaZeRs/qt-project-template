@@ -1,8 +1,7 @@
-
 #include "core/application.h"
 #include "core/base.h"
 #include "core/parameters.h"
-#include "widgets/mainwindow.h"
+#include "widgets/main_window.h"
 
 int main(int argc, char *argv[]) {
   using namespace room_sketcher;

@@ -26,35 +26,6 @@ void Settings::setLanguage(const QString &language) {
   emit languageChanged();
 }
 
-qreal Settings::defaultWindowOpacity() const { return 1.0; }
-
-qreal Settings::windowOpacity() const {
-  return contains("windowOpacity") ? value("windowOpacity").toReal()
-                                   : defaultWindowOpacity();
-}
-
-void Settings::setWindowOpacity(qreal opacity) {
-  if (windowOpacity() == opacity) return;
-
-  setValue("windowOpacity", opacity);
-  emit windowOpacityChanged();
-}
-
-bool Settings::defaultFpsVisible() const { return false; }
-
-bool Settings::isFpsVisible() const {
-  return contains("fpsVisible") ? value("fpsVisible").toBool()
-                                : defaultFpsVisible();
-}
-
-void Settings::setFpsVisible(bool fpsVisible) {
-  const bool existingValue = value("fpsVisible", defaultFpsVisible()).toBool();
-  if (fpsVisible == existingValue) return;
-
-  setValue("fpsVisible", fpsVisible);
-  emit fpsVisibleChanged();
-}
-
 void Settings::resetShortcutsToDefaults() {
   static QVector<QString> allShortcuts;
   if (allShortcuts.isEmpty()) {
@@ -93,7 +64,7 @@ void Settings::resetShortcutsToDefaults() {
   if (shortcut == existingStringValue) return;                         \
                                                                        \
   setValue(shortcutName, shortcut);                                    \
-  emit notifySignal();
+  emit notifySignal(shortcut);
 
 QString Settings::defaultNewShortcut() const {
   return QKeySequence(QKeySequence::New).toString();

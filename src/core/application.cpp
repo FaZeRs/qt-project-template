@@ -84,11 +84,7 @@ Application::Application(int& argc, char** argv)
   auto sentryClose = qScopeGuard([] { sentry_close(); });
 }
 
-Application::~Application() { m_Settings.reset(); }
-
 int Application::run() const { return m_Application->exec(); }
-
-Settings* Application::settings() const { return m_Settings.get(); }
 
 void Application::initializeSentry() {
   constexpr double sample_rate = 0.2;

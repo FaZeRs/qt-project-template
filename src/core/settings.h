@@ -14,10 +14,6 @@ class Settings : public QSettings {
 
   Q_PROPERTY(
       QString language READ language WRITE setLanguage NOTIFY languageChanged)
-  Q_PROPERTY(qreal windowOpacity READ windowOpacity WRITE setWindowOpacity
-                 NOTIFY windowOpacityChanged)
-  Q_PROPERTY(bool fpsVisible READ isFpsVisible WRITE setFpsVisible NOTIFY
-                 fpsVisibleChanged)
 
   Q_PROPERTY(QString newShortcut READ newShortcut WRITE setNewShortcut NOTIFY
                  newShortcutChanged)
@@ -50,14 +46,6 @@ class Settings : public QSettings {
   [[nodiscard]] QString defaultLanguage() const;
   [[nodiscard]] QString language() const;
   void setLanguage(const QString &language);
-
-  [[nodiscard]] qreal defaultWindowOpacity() const;
-  [[nodiscard]] qreal windowOpacity() const;
-  void setWindowOpacity(qreal opacity);
-
-  [[nodiscard]] bool defaultFpsVisible() const;
-  [[nodiscard]] bool isFpsVisible() const;
-  void setFpsVisible(bool fpsVisible);
 
   Q_INVOKABLE void resetShortcutsToDefaults();
 
@@ -111,23 +99,21 @@ class Settings : public QSettings {
 
  signals:
   void languageChanged();
-  void windowOpacityChanged();
-  void fpsVisibleChanged();
 
-  void newShortcutChanged();
-  void openShortcutChanged();
-  void saveShortcutChanged();
-  void saveAsShortcutChanged();
-  void quitShortcutChanged();
+  void newShortcutChanged(const QString &shortcut);
+  void openShortcutChanged(const QString &shortcut);
+  void saveShortcutChanged(const QString &shortcut);
+  void saveAsShortcutChanged(const QString &shortcut);
+  void quitShortcutChanged(const QString &shortcut);
 
-  void undoShortcutChanged();
-  void redoShortcutChanged();
-  void copyShortcutChanged();
-  void cutShortcutChanged();
-  void pasteShortcutChanged();
+  void undoShortcutChanged(const QString &shortcut);
+  void redoShortcutChanged(const QString &shortcut);
+  void copyShortcutChanged(const QString &shortcut);
+  void cutShortcutChanged(const QString &shortcut);
+  void pasteShortcutChanged(const QString &shortcut);
 
-  void optionsShortcutChanged();
-  void fullScreenShortcutChanged();
+  void optionsShortcutChanged(const QString &shortcut);
+  void fullScreenShortcutChanged(const QString &shortcut);
 };
 
 }  // namespace room_sketcher

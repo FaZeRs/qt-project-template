@@ -14,17 +14,14 @@ class Application {
   Application& operator=(const Application&) = delete;
   Application(Application&&) = delete;
   Application& operator=(Application&&) = delete;
-  ~Application();
+  ~Application() = default;
 
   [[nodiscard]] int run() const;
-
-  [[nodiscard]] Settings* settings() const;
 
  private:
   static void initializeSentry();
 
   Scope<QCoreApplication> m_Application;
-  Scope<Settings> m_Settings = CreateScope<Settings>();
 };
 
 }  // namespace room_sketcher
