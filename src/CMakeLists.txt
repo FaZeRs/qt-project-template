@@ -25,7 +25,7 @@ target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
 if (USE_OPENMP)
 	find_package(OpenMP)
     if(OpenMP_CXX_FOUND)
-        target_link_libraries(openmp_para_test PUBLIC OpenMP::OpenMP_CXX)
+    target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC OpenMP::OpenMP_CXX)
 	else()
         message(${WARNING_MESSAGE} "OpenMP requested but library not found")
     endif()
