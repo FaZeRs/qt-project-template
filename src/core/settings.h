@@ -114,6 +114,7 @@ class Settings : public QSettings {
 
   void optionsShortcutChanged(const QString &shortcut);
   void fullScreenShortcutChanged(const QString &shortcut);
+  void aboutShortcutChanged(const QString &shortcut);
 };
 
 }  // namespace room_sketcher

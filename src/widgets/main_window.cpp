@@ -25,91 +25,72 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
     : QMainWindow(parent, flags) {
   setObjectName("MainWindow");
   setWindowTitle(parameters::window_title);
-
   setupMenuBar();
 
   statusBar()->showMessage(tr("Status Bar"));
 }
 
 void MainWindow::setupMenuBar() {
+  auto addActionToMenu = [&settings = m_Settings, this](
+                             QMenu *menu, const QString &text,
+                             const QString &iconName, const QString &shortcut,
+                             const QString &statusTip, auto triggeredSlot,
+                             auto shortcutChangedSlot) {
+    auto action = new QAction(text, this);
+    action->setIcon(QIcon::fromTheme(iconName));
+    action->setShortcut(shortcut);
+    action->setStatusTip(statusTip);
+    menu->addAction(action);
+    connect(action, &QAction::triggered, this, triggeredSlot);
+    connect(settings.get(), shortcutChangedSlot, action,
+            &QAction::setShortcut);
+  };
+
   QMenu *file_menu = menuBar()->addMenu(tr("&File"));
-  QAction *new_act =
-      file_menu->addAction(tr("&New"), this, &MainWindow::createProject);
-  new_act->setShortcut(m_Settings->newShortcut());
-  connect(m_Settings.get(), &Settings::newShortcutChanged, new_act,
-          &QAction::setShortcut);
-  new_act->setStatusTip(tr("Create a new project"));
-  QAction *open_act =
-      file_menu->addAction(tr("&Open"), this, &MainWindow::openProject);
-  open_act->setShortcut(m_Settings->openShortcut());
-  connect(m_Settings.get(), &Settings::openShortcutChanged, open_act,
-          &QAction::setShortcut);
-  open_act->setStatusTip(tr("Open an existing project"));
-  QAction *save_act =
-      file_menu->addAction(tr("&Save"), this, &MainWindow::saveProject);
-  save_act->setShortcut(m_Settings->saveShortcut());
-  connect(m_Settings.get(), &Settings::saveShortcutChanged, save_act,
-          &QAction::setShortcut);
-  save_act->setStatusTip(tr("Save the project to disk"));
-  QAction *save_as_act =
-      file_menu->addAction(tr("&Save As"), this, &MainWindow::saveAsProject);
-  save_as_act->setShortcut(m_Settings->saveAsShortcut());
-  connect(m_Settings.get(), &Settings::saveAsShortcutChanged, save_as_act,
-          &QAction::setShortcut);
-  save_as_act->setStatusTip(tr("Save the project to disk with a new name"));
+  addActionToMenu(file_menu, tr("&New"), "document-new",
+                  m_Settings->newShortcut(), tr("Create a new project"),
+                  &MainWindow::createProject, &Settings::newShortcutChanged);
+  addActionToMenu(file_menu, tr("&Open"), "document-open",
+                  m_Settings->openShortcut(), tr("Open an existing project"),
+                  &MainWindow::openProject, &Settings::openShortcutChanged);
+  addActionToMenu(file_menu, tr("&Save"), "document-save",
+                  m_Settings->saveShortcut(), tr("Save the project"),
+                  &MainWindow::saveProject, &Settings::saveShortcutChanged);
+  addActionToMenu(file_menu, tr("&Save As"), "document-save-as",
+                  m_Settings->saveAsShortcut(),
+                  tr("Save the project with a new name"),
+                  &MainWindow::saveAsProject, &Settings::saveAsShortcutChanged);
   file_menu->addSeparator();
-  QAction *settings_act =
-      file_menu->addAction(tr("&Settings"), this, &MainWindow::settingsApp);
-  settings_act->setShortcut(m_Settings->optionsShortcut());
-  connect(m_Settings.get(), &Settings::optionsShortcutChanged, settings_act,
-          &QAction::setShortcut);
-  settings_act->setStatusTip(tr("Open settings dialog"));
-  QAction *quit_act =
-      file_menu->addAction(tr("&Quit"), qApp, &QCoreApplication::quit);
-  quit_act->setShortcut(m_Settings->quitShortcut());
-  connect(m_Settings.get(), &Settings::quitShortcutChanged, quit_act,
-          &QAction::setShortcut);
-  quit_act->setStatusTip(tr("Quit the application"));
+  addActionToMenu(file_menu, tr("&Settings"), "preferences-system",
+                  m_Settings->optionsShortcut(), tr("Open settings dialog"),
+                  &MainWindow::settingsApp, &Settings::optionsShortcutChanged);
+  file_menu->addSeparator();
+  addActionToMenu(file_menu, tr("&Quit"), "application-exit",
+                  m_Settings->quitShortcut(), tr("Quit the application"),
+                  &QCoreApplication::quit, &Settings::quitShortcutChanged);
 
   QMenu *edit_menu = menuBar()->addMenu(tr("&Edit"));
-  QAction *undo_act =
-      edit_menu->addAction(tr("&Undo"), this, &MainWindow::doUndo);
-  undo_act->setShortcut(m_Settings->undoShortcut());
-  connect(m_Settings.get(), &Settings::undoShortcutChanged, undo_act,
-          &QAction::setShortcut);
-  undo_act->setStatusTip(tr("Undo the last action"));
-  QAction *redo_act =
-      edit_menu->addAction(tr("&Redo"), this, &MainWindow::doRedo);
-  redo_act->setShortcut(m_Settings->redoShortcut());
-  connect(m_Settings.get(), &Settings::redoShortcutChanged, redo_act,
-          &QAction::setShortcut);
-  redo_act->setStatusTip(tr("Redo the last action"));
+  addActionToMenu(edit_menu, tr("&Undo"), "edit-undo",
+                  m_Settings->undoShortcut(), tr("Undo the last action"),
+                  &MainWindow::doUndo, &Settings::undoShortcutChanged);
+  addActionToMenu(edit_menu, tr("&Redo"), "edit-redo",
+                  m_Settings->redoShortcut(), tr("Redo the last action"),
+                  &MainWindow::doRedo, &Settings::redoShortcutChanged);
   edit_menu->addSeparator();
-  QAction *copy_act =
-      edit_menu->addAction(tr("&Copy"), this, &MainWindow::doCopy);
-  copy_act->setShortcut(m_Settings->copyShortcut());
-  connect(m_Settings.get(), &Settings::copyShortcutChanged, copy_act,
-          &QAction::setShortcut);
-  copy_act->setStatusTip(tr("Copy the selected item"));
-  QAction *paste_act =
-      edit_menu->addAction(tr("&Paste"), this, &MainWindow::doPaste);
-  paste_act->setShortcut(m_Settings->pasteShortcut());
-  connect(m_Settings.get(), &Settings::pasteShortcutChanged, paste_act,
-          &QAction::setShortcut);
-  paste_act->setStatusTip(tr("Paste the selected item"));
-  QAction *cut_act = edit_menu->addAction(tr("&Cut"), this, &MainWindow::doCut);
-  cut_act->setShortcut(m_Settings->cutShortcut());
-  connect(m_Settings.get(), &Settings::cutShortcutChanged, cut_act,
-          &QAction::setShortcut);
-  cut_act->setStatusTip(tr("Cut the selected item"));
+  addActionToMenu(edit_menu, tr("&Copy"), "edit-copy",
+                  m_Settings->copyShortcut(), tr("Copy the selected item"),
+                  &MainWindow::doCopy, &Settings::copyShortcutChanged);
+  addActionToMenu(edit_menu, tr("&Paste"), "edit-paste",
+                  m_Settings->pasteShortcut(), tr("Paste the selected item"),
+                  &MainWindow::doPaste, &Settings::pasteShortcutChanged);
+  addActionToMenu(edit_menu, tr("&Cut"), "edit-cut", m_Settings->cutShortcut(),
+                  tr("Cut the selected item"), &MainWindow::doCut,
+                  &Settings::cutShortcutChanged);
 
   QMenu *help_menu = menuBar()->addMenu(tr("&Help"));
-  QAction *about_act =
-      help_menu->addAction(tr("&About"), this, &MainWindow::aboutApp);
-  about_act->setStatusTip(tr("Show the application's About box"));
-  QAction *about_qt_act =
-      help_menu->addAction(tr("About &Qt"), qApp, &QApplication::aboutQt);
-  about_qt_act->setStatusTip(tr("Show the Qt library's About box"));
+  addActionToMenu(help_menu, tr("&About"), "help-about", "",
+                  tr("Show the application's About box"), &MainWindow::aboutApp,
+                  &Settings::aboutShortcutChanged);
 }
 
 void MainWindow::aboutApp() {

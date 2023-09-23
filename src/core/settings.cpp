@@ -29,18 +29,18 @@ void Settings::setLanguage(const QString &language) {
 void Settings::resetShortcutsToDefaults() {
   static QVector<QString> allShortcuts;
   if (allShortcuts.isEmpty()) {
-    allShortcuts.append(QLatin1String("newShortcut"));
-    allShortcuts.append(QLatin1String("openShortcut"));
-    allShortcuts.append(QLatin1String("saveShortcut"));
-    allShortcuts.append(QLatin1String("saveAsShortcut"));
-    allShortcuts.append(QLatin1String("quitShortcut"));
-    allShortcuts.append(QLatin1String("undoShortcut"));
-    allShortcuts.append(QLatin1String("redoShortcut"));
-    allShortcuts.append(QLatin1String("copyShortcut"));
-    allShortcuts.append(QLatin1String("cutShortcut"));
-    allShortcuts.append(QLatin1String("pasteShortcut"));
-    allShortcuts.append(QLatin1String("optionsShortcut"));
-    allShortcuts.append(QLatin1String("fullScreenToggleShortcut"));
+    allShortcuts.append("newShortcut");
+    allShortcuts.append("openShortcut");
+    allShortcuts.append("saveShortcut");
+    allShortcuts.append("saveAsShortcut");
+    allShortcuts.append("quitShortcut");
+    allShortcuts.append("undoShortcut");
+    allShortcuts.append("redoShortcut");
+    allShortcuts.append("copyShortcut");
+    allShortcuts.append("cutShortcut");
+    allShortcuts.append("pasteShortcut");
+    allShortcuts.append("optionsShortcut");
+    allShortcuts.append("fullScreenToggleShortcut");
   }
 
   foreach (const QString &shortcut, allShortcuts) {
