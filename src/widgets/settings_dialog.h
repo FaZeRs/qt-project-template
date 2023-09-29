@@ -20,7 +20,7 @@ class GeneralTab : public QWidget {
 
  public:
   explicit GeneralTab(Settings *settings, QWidget *parent = nullptr);
-  QString language() const;
+  [[nodiscard]] QString language() const;
 
  private:
   Scope<QVBoxLayout> m_MainLayout;
@@ -33,18 +33,18 @@ class ShortcutsTab : public QWidget {
 
  public:
   explicit ShortcutsTab(Settings *settings, QWidget *parent = nullptr);
-  QString newShortcut() const;
-  QString openShortcut() const;
-  QString saveShortcut() const;
-  QString saveAsShortcut() const;
-  QString quitShortcut() const;
-  QString undoShortcut() const;
-  QString redoShortcut() const;
-  QString copyShortcut() const;
-  QString cutShortcut() const;
-  QString pasteShortcut() const;
-  QString optionsShortcut() const;
-  QString fullScreenShortcut() const;
+  [[nodiscard]] QString newShortcut() const;
+  [[nodiscard]] QString openShortcut() const;
+  [[nodiscard]] QString saveShortcut() const;
+  [[nodiscard]] QString saveAsShortcut() const;
+  [[nodiscard]] QString quitShortcut() const;
+  [[nodiscard]] QString undoShortcut() const;
+  [[nodiscard]] QString redoShortcut() const;
+  [[nodiscard]] QString copyShortcut() const;
+  [[nodiscard]] QString cutShortcut() const;
+  [[nodiscard]] QString pasteShortcut() const;
+  [[nodiscard]] QString optionsShortcut() const;
+  [[nodiscard]] QString fullScreenShortcut() const;
 
  private:
   Scope<QVBoxLayout> m_MainLayout;

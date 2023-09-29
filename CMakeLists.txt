@@ -46,7 +46,8 @@ if(ENABLE_PCH AND NOT ENABLE_CLANG_TIDY)
     INTERFACE
     <vector>
     <string>
-    <utility>)
+    <utility>
+    <memory>)
 endif()
 
 if(ENABLE_CACHE)
