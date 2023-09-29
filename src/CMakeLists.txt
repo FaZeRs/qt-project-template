@@ -1,3 +1,7 @@
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+
 configure_file("config.h.in" "${CMAKE_BINARY_DIR}/configured_files/include/config.h" ESCAPE_QUOTES)
 
 find_package(QT NAMES Qt6 REQUIRED COMPONENTS Core)
@@ -33,13 +37,22 @@ if (USE_OPENMP)
 endif()
 
 target_link_system_libraries(${CMAKE_PROJECT_NAME} PRIVATE
-    spdlog::spdlog
-    sentry::sentry
     Qt::Core
     Qt::Gui
     Qt::Widgets)
 
+if (USE_SPDLOG)
+  target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE USE_SPDLOG)
+  target_link_system_libraries(${CMAKE_PROJECT_NAME} PRIVATE spdlog::spdlog)
+endif()
+
+if (USE_SENTRY)
+  target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE USE_SENTRY)
+  target_link_system_libraries(${CMAKE_PROJECT_NAME} PRIVATE sentry::sentry)
+endif()
+
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE "${CMAKE_BINARY_DIR}/configured_files/include")
+target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE QT_MESSAGELOGCONTEXT)
 
 if(ENABLE_PCH AND NOT ENABLE_CLANG_TIDY)
   target_precompile_headers(${CMAKE_PROJECT_NAME} PUBLIC pch.h)
