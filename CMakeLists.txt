@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.21)
 
+# Avoid warning about DOWNLOAD_EXTRACT_TIMESTAMP in CMake 3.24:
+cmake_policy(SET CMP0135 NEW)
+
 include(cmake/Version.cmake)
 
 project(room-sketcher
@@ -8,6 +11,7 @@ project(room-sketcher
   HOMEPAGE_URL "https://giraffe360.com"
   LANGUAGES CXX C)
 
+include(cmake/Utilities.cmake)
 include(cmake/Options.cmake)
 include(cmake/CompilationFlags.cmake)
 include(cmake/SystemLink.cmake)

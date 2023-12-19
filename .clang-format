@@ -1,5 +1,6 @@
 ﻿BasedOnStyle: Google
 IndentWidth: 2
+Standard: c++20
 ---
 Language: Cpp
 

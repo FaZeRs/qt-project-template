@@ -83,6 +83,7 @@ function(
         # TODO support Intel compiler
     endif()
 
+    # use the same warning flags for C
     set(PROJECT_WARNINGS_C "${PROJECT_WARNINGS_CXX}")
 
     target_compile_options(

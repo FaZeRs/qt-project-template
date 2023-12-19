@@ -128,7 +128,7 @@ ENV LC_ALL en_US.UTF-8
 # Install QT
 RUN pip3 install aqtinstall
 
-ARG QT_VERSION=6.5.2
+ARG QT_VERSION=6.6.0
 ARG QT_PATH=/opt/qt
 ARG QT_MODULES
 ARG QT_HOST=linux

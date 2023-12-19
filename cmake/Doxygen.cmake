@@ -6,6 +6,12 @@ function(enable_doxygen DOXYGEN_THEME)
     endif()
 
     # set better defaults for doxygen
+    is_verbose(_is_verbose)
+    if(NOT ${_is_verbose})
+        set(DOXYGEN_QUIET YES)
+    endif()
+
+    # set better defaults for doxygen
     set(DOXYGEN_CALLER_GRAPH YES)
     set(DOXYGEN_CALL_GRAPH YES)
     set(DOXYGEN_EXTRACT_ALL YES)
@@ -25,9 +31,9 @@ function(enable_doxygen DOXYGEN_THEME)
 
     if("${DOXYGEN_THEME}" STREQUAL "awesome" OR "${DOXYGEN_THEME}" STREQUAL "awesome-sidebar")
         # use a modern doxygen theme
-        # https://github.com/jothepro/doxygen-awesome-css v1.6.1
+        # https://github.com/jothepro/doxygen-awesome-css v2.3.1
         FetchContent_Declare(_doxygen_theme
-                URL https://github.com/jothepro/doxygen-awesome-css/archive/refs/tags/v2.2.0.zip)
+                URL https://github.com/jothepro/doxygen-awesome-css/archive/refs/tags/v2.3.1.zip)
         FetchContent_MakeAvailable(_doxygen_theme)
         if("${DOXYGEN_THEME}" STREQUAL "awesome" OR "${DOXYGEN_THEME}" STREQUAL "awesome-sidebar")
             set(DOXYGEN_HTML_EXTRA_STYLESHEET "${_doxygen_theme_SOURCE_DIR}/doxygen-awesome.css")

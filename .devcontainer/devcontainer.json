@@ -5,7 +5,7 @@
         "args": {
             "VARIANT": "jammy",
             "GCC_VER": "13",
-            "LLVM_VER": "16"
+            "LLVM_VER": "17"
         }
     },
     "runArgs": [
