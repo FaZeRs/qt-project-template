@@ -12,16 +12,18 @@
 #if USE_SPDLOG
 #include <spdlog/common.h>
 #include <spdlog/spdlog.h>
+
 #include "logger.h"
 #endif
+
 #include <cstring>
 
 #include "parameters.h"
 
 #if USE_SPDLOG
-static void qtLogMessageHandler(QtMsgType type,
-                                const QMessageLogContext& context,
-                                const QString& msg) {
+static void spdlogMessageHandler(QtMsgType type,
+                                 const QMessageLogContext& context,
+                                 const QString& msg) {
   QByteArray loc = msg.toUtf8();
   switch (type) {
     case QtDebugMsg:
@@ -82,18 +84,19 @@ static Scope<QCoreApplication> createApplication(int& argc, char** argv) {
 
 Application::Application(int& argc, char** argv)
     : m_Application(createApplication(argc, argv)) {
-  qSetMessagePattern("[%{time h:mm:ss.zzz}] [%{type}] [t:%{threadid}] "
-                     "[%{function}:%{line}] %{message}");
 #if USE_SPDLOG
   Logger::instance();
-  qInstallMessageHandler(qtLogMessageHandler);
+  qInstallMessageHandler(spdlogMessageHandler);
+#else
+  qSetMessagePattern(
+      "[%{time h:mm:ss.zzz}] [%{type}] [t:%{threadid}] "
+      "[%{function}:%{line}] %{message}");
 #endif
 
   qInfo("*** ************* ***");
   qInfo("*** %s ***", config::project_name);
   qInfo("*** v: %s ***", config::project_version);
   qInfo("*** ************* ***\n");
-
 
 #if USE_SENTRY
   initializeSentry();
