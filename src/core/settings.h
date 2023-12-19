@@ -12,34 +12,6 @@ namespace room_sketcher {
 class Settings : public QSettings {
   Q_OBJECT
 
-  Q_PROPERTY(
-      QString language READ language WRITE setLanguage NOTIFY languageChanged)
-
-  Q_PROPERTY(QString newShortcut READ newShortcut WRITE setNewShortcut NOTIFY
-                 newShortcutChanged)
-  Q_PROPERTY(QString openShortcut READ openShortcut WRITE setOpenShortcut NOTIFY
-                 openShortcutChanged)
-  Q_PROPERTY(QString saveShortcut READ saveShortcut WRITE setSaveShortcut NOTIFY
-                 saveShortcutChanged)
-  Q_PROPERTY(QString saveAsShortcut READ saveAsShortcut WRITE setSaveAsShortcut
-                 NOTIFY saveAsShortcutChanged)
-  Q_PROPERTY(QString quitShortcut READ quitShortcut WRITE setQuitShortcut NOTIFY
-                 quitShortcutChanged)
-  Q_PROPERTY(QString undoShortcut READ undoShortcut WRITE setUndoShortcut NOTIFY
-                 undoShortcutChanged)
-  Q_PROPERTY(QString redoShortcut READ redoShortcut WRITE setRedoShortcut NOTIFY
-                 redoShortcutChanged)
-  Q_PROPERTY(QString copyShortcut READ copyShortcut WRITE setCopyShortcut NOTIFY
-                 copyShortcutChanged)
-  Q_PROPERTY(QString cutShortcut READ cutShortcut WRITE setCutShortcut NOTIFY
-                 cutShortcutChanged)
-  Q_PROPERTY(QString pasteShortcut READ pasteShortcut WRITE setPasteShortcut
-                 NOTIFY pasteShortcutChanged)
-  Q_PROPERTY(QString optionsShortcut READ optionsShortcut WRITE
-                 setOptionsShortcut NOTIFY optionsShortcutChanged)
-  Q_PROPERTY(QString fullScreenShortcut READ fullScreenShortcut WRITE
-                 setFullScreenShortcut NOTIFY fullScreenShortcutChanged)
-
  public:
   explicit Settings(QObject *parent = nullptr);
 
