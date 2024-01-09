@@ -26,8 +26,8 @@ RUN groupadd --gid $USER_GID $USERNAME \
 # Install necessary packages available from standard repos
 RUN apt-get update -qq && export DEBIAN_FRONTEND=noninteractive && \
     apt-get install -y --no-install-recommends \
-    software-properties-common wget apt-utils file zip \
-    openssh-client gpg-agent socat rsync \
+    ca-certificates software-properties-common wget apt-utils file zip \
+    openssh-client gpg gpg-agent socat rsync \
     make ninja-build git \
     python3 python3-pip \
     locales zsh fonts-firacode \
@@ -72,13 +72,13 @@ RUN update-alternatives --install /usr/bin/clang clang $(which clang-${LLVM_VER}
 RUN update-alternatives --install /usr/bin/clang++ clang++ $(which clang++-${LLVM_VER}) 100
 
 # Add current cmake/ccmake, from Kitware
-ARG CMAKE_URL="https://apt.kitware.com/ubuntu/"
 ARG CMAKE_PKG=${VARIANT}
 RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null \
-    | gpg --dearmor - | tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null && \
-    apt-add-repository -y "deb ${CMAKE_URL} ${CMAKE_PKG} main" && \
+    | gpg --dearmor - | tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null && \
+    echo "deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ ${CMAKE_PKG} main" | tee /etc/apt/sources.list.d/kitware.list >/dev/null && \
     apt-get update -qq && export DEBIAN_FRONTEND=noninteractive && \
-    apt-get install -y --no-install-recommends cmake cmake-curses-gui
+    rm /usr/share/keyrings/kitware-archive-keyring.gpg && \
+    apt-get install -y --no-install-recommends kitware-archive-keyring cmake cmake-curses-gui
 
 # Install editors
 RUN apt-get update -qq && export DEBIAN_FRONTEND=noninteractive && \
@@ -128,7 +128,7 @@ ENV LC_ALL en_US.UTF-8
 # Install QT
 RUN pip3 install aqtinstall
 
-ARG QT_VERSION=6.6.0
+ARG QT_VERSION=6.6.1
 ARG QT_PATH=/opt/qt
 ARG QT_MODULES
 ARG QT_HOST=linux
