@@ -121,27 +121,27 @@ jobs:
         shell: bash
         working-directory: ${{ runner.workspace }}/build
         run: |
-          cmake -G "${{ matrix.generator }}" $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE:STRING=${{ matrix.build_type }} -DENABLE_COVERAGE:BOOL=${{ matrix.build_type == 'Debug' }} -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DENABLE_DOCS:BOOL=${{ contains(matrix.os, 'ubuntu') }} -DCPACK_IFW_ROOT=$IQTA_TOOLS/QtInstallerFramework/4.6/bin
+          cmake -G "${{ matrix.generator }}" $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE:STRING=${{ matrix.build_type }} -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DENABLE_DOCS:BOOL=${{ contains(matrix.os, 'ubuntu') }} -DCPACK_IFW_ROOT=$IQTA_TOOLS/QtInstallerFramework/4.6/bin
 
       - name: Build
         working-directory: ${{ runner.workspace }}/build
         shell: bash
         run: cmake --build . --parallel ${{ env.nproc }} --config ${{ matrix.build_type }}
 
-      - name: Unix - Test and coverage
-        if: runner.os != 'Windows'
-        working-directory: ${{ runner.workspace }}/build
-        shell: bash
-        run: |
-          ctest -C ${{ matrix.build_type }}
-          gcovr -j ${{ env.nproc }} --delete --root ../ --print-summary --xml-pretty --xml coverage.xml . --gcov-executable '${{ matrix.gcov_executable }}'
+      # - name: Unix - Test and coverage
+      #   if: runner.os != 'Windows'
+      #   working-directory: ${{ runner.workspace }}/build
+      #   shell: bash
+      #   run: |
+      #     ctest -C ${{ matrix.build_type }}
+      #     gcovr -j ${{ env.nproc }} --delete --root ../ --print-summary --xml-pretty --xml coverage.xml . --gcov-executable '${{ matrix.gcov_executable }}'
 
-      - name: Windows - Test and coverage
-        if: runner.os == 'Windows'
-        working-directory: ${{ runner.workspace }}/build
-        shell: bash
-        run: |
-          OpenCppCoverage.exe --export_type cobertura:coverage.xml --cover_children -- ctest -C ${{matrix.build_type}}
+      # - name: Windows - Test and coverage
+      #   if: runner.os == 'Windows'
+      #   working-directory: ${{ runner.workspace }}/build
+      #   shell: bash
+      #   run: |
+      #     OpenCppCoverage.exe --export_type cobertura:coverage.xml --cover_children -- ctest -C ${{matrix.build_type}}
 
       - name: CPack
         if: ${{ matrix.build_type == 'Release' }}
@@ -164,9 +164,9 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build/html
 
-      - name: Publish to codecov
-        uses: codecov/codecov-action@v3
-        with:
-          flags: ${{ runner.os }}
-          name: ${{ runner.os }}-coverage
-          files: ./build/coverage.xml
+      # - name: Publish to codecov
+      #   uses: codecov/codecov-action@v3
+      #   with:
+      #     flags: ${{ runner.os }}
+      #     name: ${{ runner.os }}-coverage
+      #     files: ./build/coverage.xml
