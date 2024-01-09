@@ -1,11 +1,12 @@
 #include "application.h"
 
 #include <config.h>
-#include <qapplication.h>
-#include <qbytearray.h>
-#include <qlogging.h>
-#include <qscopeguard.h>
-#include <qstring.h>
+
+#include <QApplication>
+#include <QByteArray>
+#include <QScopeGuard>
+#include <QString>
+#include <QtGlobal>
 #if USE_SENTRY
 #include <sentry.h>
 #endif

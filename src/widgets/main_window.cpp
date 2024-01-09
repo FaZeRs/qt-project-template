@@ -1,18 +1,17 @@
 #include "main_window.h"
 
-#include <QtCore/qobjectdefs.h>
 #include <config.h>
-#include <qaction.h>
-#include <qapplication.h>
-#include <qcoreapplication.h>
-#include <qdatetime.h>
-#include <qkeysequence.h>
-#include <qlogging.h>
-#include <qmenu.h>
-#include <qmenubar.h>
-#include <qmessagebox.h>
-#include <qstatusbar.h>
-#include <qstring.h>
+
+#include <QAction>
+#include <QApplication>
+#include <QCoreApplication>
+#include <QDateTime>
+#include <QKeySequence>
+#include <QMenu>
+#include <QMenuBar>
+#include <QMessageBox>
+#include <QStatusBar>
+#include <QString>
 
 #include "../core/parameters.h"
 #include "create_project_dialog.h"

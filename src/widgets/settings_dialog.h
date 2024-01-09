@@ -1,14 +1,13 @@
 #pragma once
 
-#include <qboxlayout.h>
-#include <qcombobox.h>
-#include <qdialog.h>
-#include <qdialogbuttonbox.h>
-#include <qkeysequenceedit.h>
-#include <qlabel.h>
-#include <qtabwidget.h>
-#include <qtmetamacros.h>
-#include <qwidget.h>
+#include <QBoxLayout>
+#include <QComboBox>
+#include <QDialog>
+#include <QDialogButtonBox>
+#include <QKeySequenceEdit>
+#include <QLabel>
+#include <QTabWidget>
+#include <QWidget>
 
 #include "../core/base.h"
 #include "../core/settings.h"

@@ -1,11 +1,10 @@
 #pragma once
 
-#include <qboxlayout.h>
-#include <qdialog.h>
-#include <qdialogbuttonbox.h>
-#include <qlabel.h>
-
+#include <QBoxLayout>
+#include <QDialog>
+#include <QDialogButtonBox>
 #include <QDoubleSpinBox>
+#include <QLabel>
 
 #include "../core/base.h"
 

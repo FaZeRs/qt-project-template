@@ -1,7 +1,5 @@
 #include "settings_dialog.h"
 
-#include <QtCore/qobjectdefs.h>
-
 #include <memory>
 
 #include "../core/base.h"

@@ -1,8 +1,6 @@
 #pragma once
 
-#include <qmainwindow.h>
-#include <qnamespace.h>
-#include <qtmetamacros.h>
+#include <QMainWindow>
 
 #include "../core/base.h"
 #include "../core/project_manager.h"
