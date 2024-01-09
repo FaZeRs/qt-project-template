@@ -5,6 +5,7 @@
 #include <qtmetamacros.h>
 
 #include "../core/base.h"
+#include "../core/project_manager.h"
 #include "../core/settings.h"
 
 class QWidget;
@@ -17,8 +18,8 @@ class MainWindow : public QMainWindow {
 
  private:
   Scope<Settings> m_Settings = CreateScope<Settings>();
+  ProjectManager m_ProjectManager;
 
-  [[nodiscard]] Settings* settings() const;
   void setupToolBar();
   void setupMenuBar();
 

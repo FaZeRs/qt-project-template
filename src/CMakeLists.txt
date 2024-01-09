@@ -12,8 +12,11 @@ set(SOURCE_FILES
     main.cpp
     core/application.cpp
     core/settings.cpp
+    core/project_manager.cpp
+    core/project.cpp
     widgets/main_window.cpp
-    widgets/settings_dialog.cpp)
+    widgets/settings_dialog.cpp
+    widgets/create_project_dialog.cpp)
 
 qt_add_executable(${CMAKE_PROJECT_NAME}
         ${SOURCE_FILES})

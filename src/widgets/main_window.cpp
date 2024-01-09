@@ -15,6 +15,7 @@
 #include <qstring.h>
 
 #include "../core/parameters.h"
+#include "create_project_dialog.h"
 #include "settings_dialog.h"
 
 class QWidget;
@@ -42,8 +43,7 @@ void MainWindow::setupMenuBar() {
     action->setStatusTip(statusTip);
     menu->addAction(action);
     connect(action, &QAction::triggered, this, triggeredSlot);
-    connect(settings.get(), shortcutChangedSlot, action,
-            &QAction::setShortcut);
+    connect(settings.get(), shortcutChangedSlot, action, &QAction::setShortcut);
   };
 
   QMenu *file_menu = menuBar()->addMenu(tr("&File"));
@@ -103,11 +103,17 @@ void MainWindow::aboutApp() {
 }
 
 void MainWindow::settingsApp() {
-  SettingsDialog settings_dialog(m_Settings.get(), this);
-  settings_dialog.exec();
+  SettingsDialog dialog(m_Settings.get(), this);
+  dialog.exec();
 }
 
-void MainWindow::createProject() { qInfo("createProject"); }
+void MainWindow::createProject() {
+  CreateProjectDialog dialog(this);
+  dialog.exec();
+  if (dialog.result() == QDialog::Accepted) {
+    m_ProjectManager.createProject(dialog.projectSize());
+  }
+}
 
 void MainWindow::openProject() { qInfo("openProject"); }
 
@@ -124,7 +130,5 @@ void MainWindow::doCopy() { qInfo("doCopy"); }
 void MainWindow::doPaste() { qInfo("doPaste"); }
 
 void MainWindow::doCut() { qInfo("doCut"); }
-
-Settings *MainWindow::settings() const { return m_Settings.get(); }
 
 }  // namespace room_sketcher
