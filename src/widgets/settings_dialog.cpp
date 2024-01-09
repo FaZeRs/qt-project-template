@@ -1,9 +1,5 @@
 #include "settings_dialog.h"
 
-#include <memory>
-
-#include "../core/base.h"
-
 namespace room_sketcher {
 
 SettingsDialog::SettingsDialog(Settings *settings, QWidget *parent)

@@ -1,12 +1,12 @@
 #pragma once
 
-#include <QBoxLayout>
 #include <QComboBox>
 #include <QDialog>
 #include <QDialogButtonBox>
 #include <QKeySequenceEdit>
 #include <QLabel>
 #include <QTabWidget>
+#include <QVBoxLayout>
 #include <QWidget>
 
 #include "../core/base.h"

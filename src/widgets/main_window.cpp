@@ -3,10 +3,8 @@
 #include <config.h>
 
 #include <QAction>
-#include <QApplication>
 #include <QCoreApplication>
-#include <QDateTime>
-#include <QKeySequence>
+#include <QDate>
 #include <QMenu>
 #include <QMenuBar>
 #include <QMessageBox>
