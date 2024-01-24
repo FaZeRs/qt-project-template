@@ -14,7 +14,7 @@ class ProjectManager final : public QObject {
   ProjectManager& operator=(ProjectManager&&) = delete;
   ~ProjectManager() final = default;
 
-  Project* project() const;
+  [[nodiscard]] Project* project() const;
   void createProject(const QSizeF& size);
 
  private:

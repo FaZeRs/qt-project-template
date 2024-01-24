@@ -71,6 +71,7 @@ macro(enable_clang_tidy target WARNINGS_AS_ERRORS)
                 -extra-arg=-Wno-ignored-optimization-argument
                 -extra-arg=-Wno-unused-command-line-argument
                 -p)
+
         # set standard
         if(NOT
                 "${CMAKE_CXX_STANDARD}"

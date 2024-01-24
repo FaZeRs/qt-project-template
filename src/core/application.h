@@ -21,7 +21,7 @@ class Application {
  private:
   static void initializeSentry();
 
-  Scope<QCoreApplication> m_Application;
+  Scope<QCoreApplication> m_Application{nullptr};
 };
 
 }  // namespace room_sketcher

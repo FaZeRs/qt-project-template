@@ -15,8 +15,6 @@
 namespace room_sketcher {
 
 class GeneralTab : public QWidget {
-  Q_OBJECT
-
  public:
   explicit GeneralTab(Settings *settings, QWidget *parent = nullptr);
   [[nodiscard]] QString language() const;
@@ -28,8 +26,6 @@ class GeneralTab : public QWidget {
 };
 
 class ShortcutsTab : public QWidget {
-  Q_OBJECT
-
  public:
   explicit ShortcutsTab(Settings *settings, QWidget *parent = nullptr);
   [[nodiscard]] QString newShortcut() const;
@@ -74,8 +70,6 @@ class ShortcutsTab : public QWidget {
 };
 
 class SettingsDialog : public QDialog {
-  Q_OBJECT
-
  public:
   explicit SettingsDialog(Settings *settings, QWidget *parent = nullptr);
 

@@ -11,11 +11,9 @@
 namespace room_sketcher {
 
 class CreateProjectDialog : public QDialog {
-  Q_OBJECT
-
  public:
   explicit CreateProjectDialog(QWidget *parent = nullptr);
-  QSizeF projectSize() const;
+  [[nodiscard]] QSizeF projectSize() const;
 
  private:
   Scope<QVBoxLayout> m_MainLayout{CreateScope<QVBoxLayout>()};

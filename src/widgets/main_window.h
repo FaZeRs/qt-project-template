@@ -6,8 +6,6 @@
 #include "../core/project_manager.h"
 #include "../core/settings.h"
 
-class QWidget;
-
 namespace room_sketcher {
 
 class MainWindow : public QMainWindow {
