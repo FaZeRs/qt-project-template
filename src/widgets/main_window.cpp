@@ -14,8 +14,7 @@
 #include "../core/parameters.h"
 #include "create_project_dialog.h"
 #include "settings_dialog.h"
-
-class QWidget;
+#include "toolbar.h"
 
 namespace room_sketcher {
 
@@ -25,6 +24,7 @@ MainWindow::MainWindow(const QString &unique_name,
     : KDDockWidgets::QtWidgets::MainWindow(unique_name, options, parent) {
   setWindowTitle(parameters::window_title);
   setupMenuBar();
+  setupToolBar();
 
   statusBar()->showMessage(tr("Status Bar"));
 }
@@ -89,6 +89,17 @@ void MainWindow::setupMenuBar() {
   addActionToMenu(help_menu, tr("&About"), "help-about", "",
                   tr("Show the application's About box"), &MainWindow::aboutApp,
                   &Settings::aboutShortcutChanged);
+}
+
+void MainWindow::setupToolBar() {
+  const auto tool_bar = new ToolBar(this);
+  addToolBar(Qt::LeftToolBarArea, tool_bar);
+  connect(tool_bar, &ToolBar::toolSelected, this, &MainWindow::onToolSelected);
+}
+
+void MainWindow::onToolSelected(const ToolType &tool_type) {
+  m_CurrentToolType = tool_type;
+  qInfo("Tool selected: %d", static_cast<int>(tool_type));
 }
 
 void MainWindow::aboutApp() {

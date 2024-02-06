@@ -3,6 +3,7 @@
 #include <kddockwidgets/MainWindow.h>
 
 #include "../core/base.h"
+#include "../core/namespace.h"
 #include "../core/project_manager.h"
 #include "../core/settings.h"
 
@@ -17,6 +18,7 @@ class MainWindow : public KDDockWidgets::QtWidgets::MainWindow {
  private:
   Scope<Settings> m_Settings = CreateScope<Settings>();
   ProjectManager m_ProjectManager;
+  ToolType m_CurrentToolType = ToolType::Edit;
 
   void setupToolBar();
   void setupMenuBar();
@@ -33,6 +35,7 @@ class MainWindow : public KDDockWidgets::QtWidgets::MainWindow {
   void doCut();
   void aboutApp();
   void settingsApp();
+  void onToolSelected(const ToolType &tool_type);
 };
 
 }  // namespace room_sketcher

@@ -16,10 +16,23 @@ set(SOURCE_FILES
     core/project.cpp
     widgets/main_window.cpp
     widgets/settings_dialog.cpp
-    widgets/create_project_dialog.cpp)
+    widgets/create_project_dialog.cpp
+    widgets/toolbar.cpp)
 
 qt_add_executable(${CMAKE_PROJECT_NAME}
         ${SOURCE_FILES})
+
+qt_add_resources(${CMAKE_PROJECT_NAME} "app_images"
+    PREFIX "/"
+    FILES
+        assets/icons/wall.svg
+        assets/icons/door.svg
+        assets/icons/window.svg
+        assets/icons/measurement.svg
+        assets/icons/furniture.svg
+        assets/icons/text.svg
+        assets/icons/arrow.svg
+)
 
 set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES
     MACOSX_BUNDLE TRUE
