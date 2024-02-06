@@ -7,7 +7,9 @@ int main(int argc, char *argv[]) {
   using namespace room_sketcher;
   Application app(argc, argv);
 
-  MainWindow window;
+  KDDockWidgets::MainWindowOptions options =
+      KDDockWidgets::MainWindowOption_None;
+  MainWindow window(QStringLiteral("MainWindow"), options);
   window.resize(parameters::window_width, parameters::window_height);
   window.show();
 

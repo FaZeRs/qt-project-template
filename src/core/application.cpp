@@ -6,6 +6,7 @@
 #include <QByteArray>
 #include <QScopeGuard>
 #include <QString>
+#include <QStyleFactory>
 #include <QtGlobal>
 #if USE_SENTRY
 #include <sentry.h>
@@ -16,6 +17,8 @@
 
 #include "logger.h"
 #endif
+
+#include <kddockwidgets/DockWidget.h>
 
 #include <cstring>
 
@@ -103,6 +106,9 @@ Application::Application(int& argc, char** argv)
   initializeSentry();
   auto sentryClose = qScopeGuard([] { sentry_close(); });
 #endif
+
+  KDDockWidgets::initFrontend(KDDockWidgets::FrontendType::QtWidgets);
+  QApplication::setStyle(QStyleFactory::create(QStringLiteral("Fusion")));
 }
 
 int Application::run() const { return m_Application->exec(); }

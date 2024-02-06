@@ -1,6 +1,6 @@
 #pragma once
 
-#include <QMainWindow>
+#include <kddockwidgets/MainWindow.h>
 
 #include "../core/base.h"
 #include "../core/project_manager.h"
@@ -8,9 +8,11 @@
 
 namespace room_sketcher {
 
-class MainWindow : public QMainWindow {
+class MainWindow : public KDDockWidgets::QtWidgets::MainWindow {
  public:
-  explicit MainWindow(QWidget* parent = nullptr, Qt::WindowFlags flags = {});
+  MainWindow(const QString &unique_name,
+             KDDockWidgets::MainWindowOptions options,
+             QWidget *parent = nullptr);
 
  private:
   Scope<Settings> m_Settings = CreateScope<Settings>();

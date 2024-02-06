@@ -42,7 +42,8 @@ endif()
 target_link_system_libraries(${CMAKE_PROJECT_NAME} PRIVATE
     Qt::Core
     Qt::Gui
-    Qt::Widgets)
+    Qt::Widgets
+    KDAB::kddockwidgets)
 
 if (USE_SPDLOG)
   target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE USE_SPDLOG)

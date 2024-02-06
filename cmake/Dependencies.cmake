@@ -20,4 +20,12 @@ function(setup_dependencies)
         SYSTEM YES
       )
     endif()
+
+    CPMAddPackage(
+      NAME kddockwidgets
+      VERSION 2.0.0
+      GITHUB_REPOSITORY KDAB/KDDockWidgets
+      GIT_TAG "v2.0.0"
+      OPTIONS "KDDockWidgets_QT6 ON" "KDDockWidgets_EXAMPLES OFF" "KDDockWidgets_FRONTENDS qtwidgets"
+    )
 endfunction()

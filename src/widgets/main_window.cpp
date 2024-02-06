@@ -19,9 +19,10 @@ class QWidget;
 
 namespace room_sketcher {
 
-MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
-    : QMainWindow(parent, flags) {
-  setObjectName("MainWindow");
+MainWindow::MainWindow(const QString &unique_name,
+                       KDDockWidgets::MainWindowOptions options,
+                       QWidget *parent)
+    : KDDockWidgets::QtWidgets::MainWindow(unique_name, options, parent) {
   setWindowTitle(parameters::window_title);
   setupMenuBar();
 
