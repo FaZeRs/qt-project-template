@@ -1,4 +1,4 @@
-#include "toolbar.h"
+#include "tool_bar.h"
 
 namespace room_sketcher {
 

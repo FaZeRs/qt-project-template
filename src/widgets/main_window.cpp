@@ -14,7 +14,7 @@
 #include "../core/parameters.h"
 #include "create_project_dialog.h"
 #include "settings_dialog.h"
-#include "toolbar.h"
+#include "tool_bar.h"
 
 namespace room_sketcher {
 

@@ -17,7 +17,7 @@ set(SOURCE_FILES
     widgets/main_window.cpp
     widgets/settings_dialog.cpp
     widgets/create_project_dialog.cpp
-    widgets/toolbar.cpp)
+    widgets/tool_bar.cpp)
 
 qt_add_executable(${CMAKE_PROJECT_NAME}
         ${SOURCE_FILES})
