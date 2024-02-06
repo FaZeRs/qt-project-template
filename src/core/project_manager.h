@@ -5,7 +5,6 @@
 namespace room_sketcher {
 
 class ProjectManager final : public QObject {
-  Q_OBJECT
  public:
   explicit ProjectManager(QObject* parent = nullptr);
   ProjectManager(const ProjectManager&) = delete;
