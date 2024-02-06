@@ -18,10 +18,7 @@
 
 namespace room_sketcher {
 
-MainWindow::MainWindow(const QString &unique_name,
-                       KDDockWidgets::MainWindowOptions options,
-                       QWidget *parent)
-    : KDDockWidgets::QtWidgets::MainWindow(unique_name, options, parent) {
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   setWindowTitle(parameters::window_title);
   setupMenuBar();
   setupToolBar();

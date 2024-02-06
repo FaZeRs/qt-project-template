@@ -18,8 +18,6 @@
 #include "logger.h"
 #endif
 
-#include <kddockwidgets/DockWidget.h>
-
 #include <cstring>
 
 #include "parameters.h"
@@ -107,7 +105,6 @@ Application::Application(int& argc, char** argv)
   auto sentryClose = qScopeGuard([] { sentry_close(); });
 #endif
 
-  KDDockWidgets::initFrontend(KDDockWidgets::FrontendType::QtWidgets);
   QApplication::setStyle(QStyleFactory::create(QStringLiteral("Fusion")));
 }
 
