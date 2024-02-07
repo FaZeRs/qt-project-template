@@ -13,4 +13,7 @@ inline static constexpr auto window_title{"Room Sketcher"};
 inline static constexpr auto window_width{1200};
 inline static constexpr auto window_height{1200};
 
+// Graphics item parameters
+inline static constexpr auto wall_width{10};
+
 }  // namespace room_sketcher::parameters

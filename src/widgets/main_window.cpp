@@ -24,6 +24,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   setupToolBar();
 
   statusBar()->showMessage(tr("Status Bar"));
+
+  m_Scene = CreateScope<GraphicsScene>(this);
+  m_View = CreateScope<GraphicsView>(m_Scene.get(), this);
+  setCentralWidget(m_View.get());
 }
 
 void MainWindow::setupMenuBar() {

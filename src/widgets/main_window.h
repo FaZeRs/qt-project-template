@@ -6,6 +6,8 @@
 #include "../core/namespace.h"
 #include "../core/project_manager.h"
 #include "../core/settings.h"
+#include "graphics_scene.h"
+#include "graphics_view.h"
 
 namespace room_sketcher {
 
@@ -17,6 +19,8 @@ class MainWindow : public QMainWindow {
   Scope<Settings> m_Settings = CreateScope<Settings>();
   ProjectManager m_ProjectManager;
   ToolType m_CurrentToolType = ToolType::Edit;
+  Scope<GraphicsView> m_View{nullptr};
+  Scope<GraphicsScene> m_Scene{nullptr};
 
   void setupToolBar();
   void setupMenuBar();
