@@ -14,12 +14,17 @@ class Wall final : public QGraphicsItem {
   Wall& operator=(Wall&&) = delete;
   ~Wall() final = default;
 
-  QRectF boundingRect() const final;
+  [[nodiscard]] QRectF boundingRect() const final;
   void paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
              QWidget* widget) final;
+  [[nodiscard]] QPainterPath shape() const final;
 
  private:
   QLineF m_Segment;
   qreal m_Width{parameters::wall_width};
+  QPainterPath m_Shape;
+  QPainterPath m_BoundingPath;
+
+  void updateShape();
 };
 }  // namespace room_sketcher

@@ -20,7 +20,6 @@ set(SOURCE_FILES
     widgets/tool_bar.cpp
     widgets/graphics_view.cpp
     widgets/graphics_scene.cpp
-    utils/math_utils.cpp
     items/wall.cpp)
 
 qt_add_executable(${CMAKE_PROJECT_NAME}

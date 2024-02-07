@@ -15,5 +15,6 @@ inline static constexpr auto window_height{1200};
 
 // Graphics item parameters
 inline static constexpr auto wall_width{10};
+inline static constexpr auto selection_margin{5};
 
 }  // namespace room_sketcher::parameters
