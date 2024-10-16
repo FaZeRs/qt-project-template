@@ -1,9 +1,11 @@
 cmake_minimum_required(VERSION 3.26 FATAL_ERROR)
 
-# Avoid warning about DOWNLOAD_EXTRACT_TIMESTAMP in CMake 3.24:
-cmake_policy(SET CMP0135 NEW)
+include(cmake/CPM.cmake)
 
-include(cmake/Version.cmake)
+CPMAddPackage("gh:fazers/cmake#1.0.0")
+set(CMAKE_MODULE_PATH "${cmake_SOURCE_DIR};")
+
+include(version)
 
 project(room-sketcher
   VERSION ${VERSION_SHORT}
@@ -11,10 +13,9 @@ project(room-sketcher
   HOMEPAGE_URL "https://giraffe360.com"
   LANGUAGES CXX C)
 
-include(cmake/Utilities.cmake)
 include(cmake/Options.cmake)
 include(cmake/CompilationFlags.cmake)
-include(cmake/SystemLink.cmake)
+include(system-link)
 
 include(cmake/Dependencies.cmake)
 setup_dependencies()
@@ -22,27 +23,30 @@ setup_dependencies()
 add_library(project_warnings INTERFACE)
 add_library(project_options INTERFACE)
 
-include(cmake/CompilerWarnings.cmake)
+include(compiler-warnings)
 set_project_warnings(project_warnings ${WARNINGS_AS_ERRORS} "" "" "")
 
-include(cmake/StaticAnalyzers.cmake)
-if (ENABLE_CPPCHECK)
+include(static-analyzers)
+
+if(ENABLE_CPPCHECK)
   enable_cppcheck(project_warnings ${WARNINGS_AS_ERRORS} "")
 endif()
-if (ENABLE_CLANG_TIDY)
+
+if(ENABLE_CLANG_TIDY)
   enable_clang_tidy(project_warnings ${WARNINGS_AS_ERRORS} "")
 endif()
-if (ENABLE_INCLUDE_WHAT_YOU_USE)
+
+if(ENABLE_INCLUDE_WHAT_YOU_USE)
   enable_include_what_you_use(project_warnings)
 endif()
 
-include(cmake/Sanitizers.cmake)
+include(sanitizers)
 enable_sanitizers(project_options
-        ${ENABLE_SANITIZER_ADDRESS}
-        ${ENABLE_SANITIZER_LEAK}
-        ${ENABLE_SANITIZER_UNDEFINED}
-        ${ENABLE_SANITIZER_THREAD}
-        ${ENABLE_SANITIZER_MEMORY})
+  ${ENABLE_SANITIZER_ADDRESS}
+  ${ENABLE_SANITIZER_LEAK}
+  ${ENABLE_SANITIZER_UNDEFINED}
+  ${ENABLE_SANITIZER_THREAD}
+  ${ENABLE_SANITIZER_MEMORY})
 
 if(ENABLE_PCH AND NOT ENABLE_CLANG_TIDY)
   target_precompile_headers(
@@ -55,12 +59,12 @@ if(ENABLE_PCH AND NOT ENABLE_CLANG_TIDY)
 endif()
 
 if(ENABLE_CACHE)
-  include(cmake/Cache.cmake)
+  include(cache)
   enable_cache()
 endif()
 
 if(ENABLE_COVERAGE)
-  include(cmake/CodeCoverage.cmake)
+  include(code-coverage)
   enable_coverage(project_options)
 endif()
 
@@ -78,8 +82,8 @@ if(COMPILE_TESTS)
   add_subdirectory(tests)
 endif()
 
-if (ENABLE_DOCS)
-  include(cmake/Doxygen.cmake)
+if(ENABLE_DOCS)
+  include(doxygen)
   enable_doxygen("")
 endif()
 
